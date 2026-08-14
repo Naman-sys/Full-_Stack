@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body{
+            margin: 0;
+            min-height: 100%;
+            padding: 0;
+        }
+        body {
+            min-height: 100vh;
+           background: linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.62)),url("https://www.get-licensed.co.uk/get-daily/wp-content/uploads/2019/08/apps.55787.9007199266246365.687a10a8-4c4a-4a47-8ec5-a95f70d8852d.jpg");
+           background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            }
+        #logo{
+            width:fit-content;
+            position: absolute;
+            left:5%;
+            top: 0%;
+        }
+        h1{
+            color: #e50914;
+            font-family:Bebas Neue, sans-serif;
+            font-size:40px;
+            top: 3%;
+            transform:skewX(-5deg);
+        }
+        #lang{
+            position: absolute;
+            right:7%;
+            top: 5%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        select{
+            width: 150px;
+            height: 30px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            background-color: #060505;
+            color: #fff;
+        }
+        button{
+            height: 30px;
+            width: 90px;
+            border: none;
+            box-shadow: none;
+            appearance: none;
+            border-radius: 5px;
+            background-color: #e50914;
+            color: #fff;
+        }
+        #content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        p{
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: #fff;
+        }
+        input{
+            width: 300px;
+            height: 40px;
+            padding: 10px;
+            border-radius: 5px;            
+            font-size: 16px;
+            background:transparent;
+            border: 1px solid #fff;
+            box-shadow: none;
+            appearance: none;
+        }
+        #btn{
+            height: 60px;
+            width: 120px;
+            border-radius: 5px;
+            background-color: #e50914;
+            font-size: 16px;
+            color: #fff;
+            border: none;
+            box-shadow: none;
+            appearance: none;
+            margin-left: 10px;
+        }
+        #h{
+            font-family: Arial, sans-serif;
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="logo">  
+        <h1>NETFLIX</h1>
+    </div>
+    <div id="lang">
+        <select>
+            <option value="en">文A&nbsp;&nbsp;English</option>
+            <option value="pt">文A&nbsp;&nbsp;Hindi</option>
+        </select>
+        <button>Sign In</button>
+    </div>
+    <div id="content">
+        <h1 id="h">Unlimited movies,shows<br> and more</h1>
+        <p>Starts at $5.99/month.Cancel anytime</p>
+        <br>
+        <p>Ready to watch? Enter your email to create or restart your <br> membership.</p>
+        <form>
+            <input type="email" placeholder="Email address" required>
+            <button type="submit" id="btn">Get Started</button>
+        </form>
+
+        
+    </div>
+    
+</body>
+</html>
