@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2+p{
+            color: blue;
+        }
+        h2~p{
+            text-transform: uppercase;
+        }
+        section>h2{
+            color: brown;
+        }
+        button:hover{
+            background-color: black;
+            color: aliceblue;
+        }
+        button:active{
+            background-color: red;
+            color: aliceblue;
+        }
+        button:focus{
+            background-color: blueviolet;
+            color: aliceblue;
+        }
+        a:link{
+            text-decoration: none;
+            color: black;
+        }
+        a:visited{
+            color: green;
+
+        }
+        input:checked{
+            box-shadow: 1px 1px 5px black;
+            accent-color: pink;
+        }
+        li:nth-child(3){
+            background-color: black;
+            color: aliceblue;
+        }
+        li:nth-child(2){
+            background-color: maroon;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h2>Heaading</h2>
+        <p>para 1</p>
+        <p>para 2</p>
+    </section>
+    <button>Click me</button>
+    <a href="#1">Link</a>
+    <input type="checkbox">
+    <br>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</body>
+</html>
