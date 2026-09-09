@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border:3px dotted rgb(0, 0, 0);
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            flex-direction:row;
+
+        }
+        #bx1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            flex-basis: 150px;
+            flex-grow: 1;
+        }
+        #bx1:hover{
+            flex-basis: 200px;
+        }
+        #bx2{
+            width: 100px;
+            height: 100px;
+            flex-basis: 150px;
+            background-color: green;
+            flex-grow: 1;
+        }
+        #bx3{
+            width: 100px;
+            height: 100px;
+            flex-basis: 150px;
+            background-color: blue;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="bx1">1</div>
+    <div id="bx2">2</div>
+    <div id="bx3">3</div>
+</body>
+</html>

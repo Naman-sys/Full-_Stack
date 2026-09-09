@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: grid;
+
+            grid-template-columns: repeat(4, 116px);
+            grid-template-rows: repeat(3, 1fr);
+
+            gap: 10px;
+
+            grid-template-areas:
+                "box1 box1 box1 box1"
+                "box5 box6 box7 box8"
+                "box5 box10 box10 box12";
+
+            width: 500px;
+            height: 600px;
+
+            background-color: rgb(249, 249, 249);
+        }
+        @media (max-width: 700px) {
+
+            .container {
+                width: 90vw;
+                height: 600px;
+
+                grid-template-columns: repeat(2, 1fr);
+
+                grid-template-areas:
+                    "box1 box1"
+                    "box5 box6"
+                    "box5 box7"
+                    "box8 box8"
+                    "box10 box12";
+            }
+        }
+        @media (max-width: 450px) {
+
+            .container {
+                width: 95vw;
+                height: auto;
+
+                grid-template-columns: 1fr;
+
+                grid-template-rows: repeat(8, 150px);
+
+                grid-template-areas:
+                    "box1"
+                    "box5"
+                    "box6"
+                    "box7"
+                    "box8"
+                    "box10"
+                    "box12";
+            }
+        }
+
+        #box1  { grid-area: box1;  }
+        #box2  { grid-area: box2; }
+        #box3  { grid-area: box3; }
+        #box4  { grid-area: box4; }
+
+        #box5  { grid-area: box5; }
+        #box6  { grid-area: box6; }
+        #box7  { grid-area: box7; }
+        #box8  { grid-area: box8; }
+
+        #box9  { grid-area: box9; }
+        #box10 { grid-area: box10; }
+        #box11 { grid-area: box11; }
+        #box12 { grid-area: box12; }
+
+        #box1, #box2, #box3, #box4,
+        #box5, #box6, #box7, #box8,
+        #box9, #box10, #box11, #box12 {
+            background-color: rgb(92, 34, 2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="box1"></div>
+        <div id="box2"></div>
+        <div id="box3"></div>
+        <div id="box4"></div>
+
+        <div id="box5"></div>
+        <div id="box6"></div>
+        <div id="box7"></div>
+        <div id="box8"></div>
+
+        <div id="box9"></div>
+        <div id="box10"></div>
+        <div id="box11"></div>
+        <div id="box12"></div>
+    </div>
+
+</body>
+</html>
