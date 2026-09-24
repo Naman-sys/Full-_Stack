@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLA University - Tech Summit 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #F8FAFC; color: #475569; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* Navbar */
+  .navbar { height: 72px; background: #FFFFFF; border-bottom: 1px solid #CBD5E1; position: relative; }
+  .navbar .container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+  .logo { font-weight: 700; font-size: 18px; color: #111827; display: flex; align-items: center; gap: 8px; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: #475569; font-size: 14px; font-weight: 500; }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: #0F172A; }
+
+  .btn { height: 48px; padding: 0 24px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+  .btn-primary { background: #2563EB; color: #fff; }
+  .btn-primary:hover { background: #1D4ED8; }
+  .btn-outline { background: #fff; color: #0F172A; border: 1px solid #CBD5E1; }
+  .btn-outline:hover { background: #F1F5F9; }
+
+  /* Hero */
+  .hero {
+    height: 600px;
+    background:
+      linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)),
+      linear-gradient(135deg, #0F172A, #2563EB);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+  }
+  .hero-content { max-width: 760px; padding: 0 24px; }
+  .tag { display: inline-block; background: rgba(255,255,255,0.15); padding: 6px 16px; border-radius: 999px; font-size: 13px; margin-bottom: 16px; }
+  .hero h1 { font-size: 56px; font-weight: 700; line-height: 1.05; }
+  .hero p { font-size: 20px; margin-top: 16px; opacity: 0.9; }
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 32px; }
+
+  /* Sections */
+  .section { padding: 64px 0; }
+  .section h2 { font-size: 32px; font-weight: 700; color: #111827; margin-bottom: 32px; text-align: center; }
+
+  /* Event details */
+  .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .detail-card { background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 12px; padding: 24px; display: flex; gap: 16px; align-items: center; }
+  .detail-icon { font-size: 28px; }
+  .detail-card h3 { font-size: 14px; color: #475569; font-weight: 500; }
+  .detail-card p { font-size: 18px; font-weight: 600; color: #111827; }
+  .detail-card span { font-size: 13px; color: #7C3AED; }
+
+  /* Speakers */
+  .speakers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .speaker-card { text-align: center; }
+  .speaker-img { width: 96px; height: 96px; border-radius: 50%; background: #2563EB; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 600; margin: 0 auto 12px; }
+  .speaker-card h3 { font-size: 18px; font-weight: 600; color: #111827; }
+  .speaker-card p { font-size: 14px; color: #475569; margin-top: 4px; }
+
+  /* Schedule */
+  .schedule-list { background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 12px; padding: 0 24px; }
+  .schedule-row { display: grid; grid-template-columns: 120px 1fr; padding: 20px 0; border-bottom: 1px solid #E2E8F0; }
+  .schedule-row:last-child { border-bottom: none; }
+  .schedule-row .time { font-weight: 600; color: #2563EB; }
+
+  footer { background: #0F172A; color: #CBD5E1; text-align: center; padding: 24px; font-size: 14px; }
+
+  /* Tablet */
+  @media (max-width: 1023px) {
+    .speakers-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 767px) {
+    .details-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Mobile */
+  @media (max-width: 639px) {
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .hero { height: 500px; }
+    .hero h1 { font-size: 36px; }
+    .hero p { font-size: 18px; }
+    .hero-buttons { flex-direction: column; }
+    .section h2 { font-size: 26px; }
+    .speakers-grid { grid-template-columns: 1fr; }
+    .schedule-row { grid-template-columns: 90px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">&#127891; GLA University</div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="btn btn-primary">Register Now</a>
+        <button class="menu-btn">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="tag">Tech &middot; Learn &middot; Connect</span>
+      <h1>TECH SUMMIT 2026</h1>
+      <p>Innovating the Future of Technology</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">Register Now</a>
+        <a href="#schedule" class="btn btn-outline" style="background:#fff;">View Schedule</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Event Details</h2>
+      <div class="details-grid">
+        <div class="detail-card">
+          <div class="detail-icon">&#128197;</div>
+          <div>
+            <h3>Date</h3>
+            <p>15 Oct 2026</p>
+            <span>Friday</span>
+          </div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-icon">&#128205;</div>
+          <div>
+            <h3>Venue</h3>
+            <p>GLA University</p>
+            <span>Mathura</span>
+          </div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-icon">&#127908;</div>
+          <div>
+            <h3>Speakers</h3>
+            <p>25+</p>
+            <span>Industry Experts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:#fff;">
+    <div class="container">
+      <h2>Featured Speakers</h2>
+      <div class="speakers-grid">
+        <div class="speaker-card">
+          <div class="speaker-img">AS</div>
+          <h3>Dr. Ananya Sharma</h3>
+          <p>AI Researcher</p>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-img">RM</div>
+          <h3>Rahul Mehta</h3>
+          <p>CTO, TechCorp</p>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-img">PN</div>
+          <h3>Priya Nair</h3>
+          <p>Product Lead</p>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-img">VS</div>
+          <h3>Vikram Singh</h3>
+          <p>Cloud Architect</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="schedule">
+    <div class="container">
+      <h2>Event Schedule</h2>
+      <div class="schedule-list">
+        <div class="schedule-row"><span class="time">10:00</span><span>Opening Ceremony</span></div>
+        <div class="schedule-row"><span class="time">11:00</span><span>AI &amp; Future</span></div>
+        <div class="schedule-row"><span class="time">12:30</span><span>Lunch</span></div>
+        <div class="schedule-row"><span class="time">02:00</span><span>Cloud Computing</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 GLA University. All rights reserved.
+  </footer>
+
+</body>
+</html>

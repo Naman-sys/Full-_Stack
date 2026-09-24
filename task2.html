@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopKart - Product Listing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #F8FAFC; color: #6B7280; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  /* Navbar */
+  .navbar { height: 72px; background: #FFFFFF; border-bottom: 1px solid #E5E7EB; }
+  .navbar .container { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 16px; }
+  .logo { font-weight: 700; font-size: 20px; color: #111827; flex-shrink: 0; }
+  .search-box { flex: 1; max-width: 420px; }
+  .search-box input { width: 100%; padding: 8px 16px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; }
+  .nav-icons { display: flex; gap: 20px; font-size: 20px; flex-shrink: 0; }
+  .menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; }
+
+  .breadcrumb { padding: 16px 0; font-size: 14px; color: #6B7280; }
+
+  /* Layout */
+  .layout { display: flex; gap: 32px; padding-bottom: 64px; align-items: flex-start; }
+
+  .sidebar { width: 240px; flex-shrink: 0; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 20px; }
+  .filter-group { margin-bottom: 24px; }
+  .filter-group:last-of-type { margin-bottom: 20px; }
+  .filter-group h3 { font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 12px; }
+  .filter-group label { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 10px; color: #6B7280; }
+  .apply-btn { width: 100%; background: #2563EB; color: #fff; border: none; padding: 10px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; }
+  .apply-btn:hover { background: #1D4ED8; }
+
+  /* Products */
+  .products { flex: 1; min-width: 0; }
+  .products-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 14px; }
+  .products-header select { padding: 6px 12px; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 14px; }
+
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .product-card { position: relative; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; transition: box-shadow 0.2s; }
+  .product-card:hover { box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+
+  .product-img { height: 220px; background: #F1F5F9; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 12px; }
+  .product-img span { font-size: 56px; display: inline-block; transition: transform 0.3s; }
+  .product-card:hover .product-img span { transform: scale(1.15); }
+
+  .badge { position: absolute; top: 24px; left: 24px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 4px 8px; border-radius: 4px; color: #fff; }
+  .badge.sale { background: #DC2626; }
+  .badge.new { background: #2563EB; }
+
+  .category { font-size: 13px; color: #6B7280; margin-bottom: 4px; }
+  .product-name { font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 6px; }
+  .rating { font-size: 13px; color: #F59E0B; margin-bottom: 10px; }
+  .rating .count { color: #6B7280; margin-left: 4px; }
+
+  .price-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .price { font-size: 20px; font-weight: 700; color: #111827; }
+  .old-price { font-size: 14px; text-decoration: line-through; color: #6B7280; }
+
+  .add-cart { margin-top: auto; background: #2563EB; color: #fff; border: none; padding: 10px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; }
+  .add-cart:hover { background: #1D4ED8; }
+
+  @media (min-width: 1280px) {
+    .products-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (max-width: 1023px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; display: flex; gap: 32px; overflow-x: auto; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 639px) {
+    .search-box { display: none; }
+    .sidebar { display: none; }
+    .products-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">ShopKart</div>
+      <div class="search-box">
+        <input type="text" placeholder="Search for products...">
+      </div>
+      <div class="nav-icons">
+        <button class="menu-btn" id="menuBtn">&#9776;</button>
+        <span>&#128722;</span>
+        <span>&#128100;</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="breadcrumb">Electronics &gt; Laptops</div>
+
+    <div class="layout">
+      <aside class="sidebar" id="sidebar">
+        <div class="filter-group">
+          <h3>Category</h3>
+          <label><input type="checkbox" checked> Laptops</label>
+          <label><input type="checkbox"> Desktops</label>
+          <label><input type="checkbox"> Tablets</label>
+          <label><input type="checkbox"> Accessories</label>
+        </div>
+        <div class="filter-group">
+          <h3>Price Range</h3>
+          <label><input type="checkbox"> &#8377;0 - &#8377;20,000</label>
+          <label><input type="checkbox"> &#8377;20,000 - &#8377;50,000</label>
+          <label><input type="checkbox"> &#8377;50,000 - &#8377;75,000</label>
+          <label><input type="checkbox"> &#8377;75,000+</label>
+        </div>
+        <div class="filter-group">
+          <h3>Brand</h3>
+          <label><input type="checkbox"> Dell</label>
+          <label><input type="checkbox"> HP</label>
+          <label><input type="checkbox"> Lenovo</label>
+          <label><input type="checkbox"> Apple</label>
+        </div>
+        <button class="apply-btn">Apply Filters</button>
+      </aside>
+
+      <main class="products">
+        <div class="products-header">
+          <span>Showing 6 results</span>
+          <select>
+            <option>Sort by: Popularity</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+        </div>
+
+        <div class="products-grid">
+
+          <div class="product-card">
+            <span class="badge sale">SALE</span>
+            <div class="product-img"><span>&#128187;</span></div>
+            <div class="category">Laptops</div>
+            <div class="product-name">Dell Inspiron 15</div>
+            <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9734; <span class="count">(1.2k)</span></div>
+            <div class="price-row">
+              <span class="price">&#8377;45,990</span>
+              <span class="old-price">&#8377;68,990</span>
+            </div>
+            <button class="add-cart">Add to Cart</button>
+          </div>
+
+          <div class="product-card">
+            <span class="badge new">NEW</span>
+            <div class="product-img"><span>&#128187;</span></div>
+            <div class="category">Laptops</div>
+            <div class="product-name">HP Pavilion</div>
+            <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9734; <span class="count">(892)</span></div>
+            <div class="price-row">
+              <span class="price">&#8377;52,990</span>
+            </div>
+            <button class="add-cart">Add to Cart</button>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img"><span>&#128187;</span></div>
+            <div class="category">Laptops</div>
+            <div class="product-name">Lenovo IdeaPad</div>
+            <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9734; <span class="count">(654)</span></div>
+            <div class="price-row">
+              <span class="price">&#8377;38,990</span>
+            </div>
+            <button class="add-cart">Add to Cart</button>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img"><span>&#128187;</span></div>
+            <div class="category">Laptops</div>
+            <div class="product-name">MacBook Air M2</div>
+            <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9733; <span class="count">(1.3k)</span></div>
+            <div class="price-row">
+              <span class="price">&#8377;93,900</span>
+            </div>
+            <button class="add-cart">Add to Cart</button>
+          </div>
+
+          <div class="product-card">
+            <span class="badge new">NEW</span>
+            <div class="product-img"><span>&#128187;</span></div>
+            <div class="category">Laptops</div>
+            <div class="product-name">ASUS Vivobook</div>
+            <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9734; <span class="count">(728)</span></div>
+            <div class="price-row">
+              <span class="price">&#8377;41,990</span>
+            </div>
+            <button class="add-cart">Add to Cart</button>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img"><span>&#128187;</span></div>
+            <div class="category">Laptops</div>
+            <div class="product-name">Dell XPS 13</div>
+            <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9734; <span class="count">(1.4k)</span></div>
+            <div class="price-row">
+              <span class="price">&#8377;89,990</span>
+            </div>
+            <button class="add-cart">Add to Cart</button>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      document.getElementById('sidebar').classList.toggle('show');
+    });
+  </script>
+
+</body>
+</html>

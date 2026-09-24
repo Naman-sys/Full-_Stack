@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowTask - SaaS Landing Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #F8FAFC; color: #475569; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* Navbar */
+  .navbar { height: 72px; background: #FFFFFF; border-bottom: 1px solid #E2E8F0; position: relative; }
+  .navbar .container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+  .logo { font-weight: 700; font-size: 20px; color: #0F172A; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: #475569; font-size: 14px; font-weight: 500; }
+  .nav-right { display: flex; gap: 16px; align-items: center; }
+  .btn-login { text-decoration: none; color: #475569; font-size: 14px; font-weight: 500; }
+  .btn-primary { background: #4F46E5; color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; }
+  .btn-primary:hover { background: #4338CA; }
+  .btn-secondary { border: 1px solid #E2E8F0; background: #fff; color: #0F172A; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; }
+  .menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: #0F172A; }
+
+  /* Hero */
+  .hero { min-height: 520px; display: flex; align-items: center; padding-top: 80px; padding-bottom: 80px; }
+  .hero-content { width: 650px; max-width: 100%; }
+  .hero h1 { font-size: 48px; font-weight: 700; line-height: 1.1; color: #0F172A; }
+  .hero p { font-size: 18px; line-height: 1.6; margin-top: 20px; }
+  .hero-buttons { display: flex; gap: 16px; margin-top: 32px; }
+
+  /* Features */
+  .features { padding: 48px 0 96px; }
+  .features h2 { font-size: 32px; font-weight: 700; color: #0F172A; text-align: center; }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+  .feature-card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; }
+  .feature-icon { width: 40px; height: 40px; background: #EEF2FF; color: #4F46E5; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 20px; }
+  .feature-card h3 { font-size: 20px; font-weight: 600; color: #0F172A; margin-bottom: 8px; }
+  .feature-card p { font-size: 16px; }
+
+  /* Tablet */
+  @media (max-width: 1023px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Mobile */
+  @media (max-width: 639px) {
+    .nav-links { display: none; flex-direction: column; gap: 16px; position: absolute; top: 72px; left: 0; width: 100%; background: #fff; padding: 16px 24px; border-bottom: 1px solid #E2E8F0; }
+    .nav-links.show { display: flex; }
+    .btn-login { display: none; }
+    .menu-btn { display: block; }
+    .hero { text-align: center; }
+    .hero-content { width: 100%; margin: 0 auto; }
+    .hero h1 { font-size: 36px; }
+    .hero-buttons { flex-direction: column; }
+    .features-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">FlowTask</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Docs</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="btn-login">Login</a>
+        <a href="#" class="btn-primary">Get Started</a>
+        <button class="menu-btn" id="menuBtn">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Build Better Products Faster With Our Platform</h1>
+        <p>Streamline your workflow, collaborate with your team and ship faster with our all-in-one platform.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn-primary">Get Started</a>
+          <a href="#" class="btn-secondary">View Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2>Powerful Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#9889;</div>
+          <h3>Fast &amp; Reliable</h3>
+          <p>Experience blazing fast performance with 99.9% uptime.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128101;</div>
+          <h3>Team Collaboration</h3>
+          <p>Work together seamlessly with real-time updates.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128737;</div>
+          <h3>Secure by Design</h3>
+          <p>Your data is always protected with enterprise-grade security.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      document.getElementById('navLinks').classList.toggle('show');
+    });
+  </script>
+
+</body>
+</html>

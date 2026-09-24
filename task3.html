@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdminPro - Analytics Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #F1F5F9; color: #64748B; }
+
+  .dashboard { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar { width: 240px; flex-shrink: 0; background: #0F172A; color: #CBD5E1; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; transition: left 0.3s; }
+  .sidebar .logo { font-size: 20px; font-weight: 700; color: #fff; padding: 24px; }
+  .sidebar nav { flex: 1; }
+  .sidebar nav a { display: flex; align-items: center; gap: 12px; padding: 12px 24px; color: #CBD5E1; text-decoration: none; font-size: 14px; font-weight: 500; }
+  .sidebar nav a:hover { background: rgba(255,255,255,0.05); }
+  .sidebar nav a.active { background: #4F46E5; color: #fff; }
+  .sidebar .profile { display: flex; align-items: center; gap: 12px; padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; background: #4F46E5; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; flex-shrink: 0; }
+  .profile .name { font-size: 14px; color: #fff; }
+  .profile .role { font-size: 12px; color: #94A3B8; }
+
+  /* Main */
+  .main { flex: 1; min-width: 0; }
+  .header { height: 64px; background: #FFFFFF; border-bottom: 1px solid #E2E8F0; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; position: sticky; top: 0; z-index: 10; gap: 16px; }
+  .header input { padding: 8px 16px; border: 1px solid #E2E8F0; border-radius: 8px; width: 280px; font-size: 14px; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .menu-btn { display: none; background: none; border: none; font-size: 22px; cursor: pointer; color: #0F172A; }
+
+  .content { padding: 32px; }
+  .content h1 { font-size: 24px; font-weight: 700; color: #0F172A; margin-bottom: 24px; }
+
+  .card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px; }
+  .card h2 { font-size: 16px; font-weight: 600; color: #0F172A; margin-bottom: 16px; }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .kpi-label { font-size: 14px; font-weight: 500; }
+  .kpi-value { font-size: 28px; font-weight: 700; color: #0F172A; margin: 8px 0; }
+  .kpi-change { font-size: 13px; font-weight: 500; }
+  .kpi-change.up { color: #16A34A; }
+  .kpi-change.down { color: #DC2626; }
+
+  /* Analytics row */
+  .analytics-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 24px; }
+
+  .chart-value { font-size: 20px; font-weight: 700; color: #0F172A; }
+  .chart-change { font-size: 13px; color: #16A34A; margin-left: 8px; }
+
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 320px; }
+  th { text-align: left; padding: 8px; color: #64748B; font-weight: 500; border-bottom: 1px solid #E2E8F0; }
+  td { padding: 8px; border-bottom: 1px solid #E2E8F0; }
+  .status { padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  .status.delivered { background: #DCFCE7; color: #16A34A; }
+  .status.processing { background: #FEF3C7; color: #D97706; }
+  .status.shipped { background: #DBEAFE; color: #2563EB; }
+  .status.cancelled { background: #FEE2E2; color: #DC2626; }
+
+  /* Traffic row */
+  .traffic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 12px; height: 160px; padding-bottom: 24px; position: relative; }
+  .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+  .bar { width: 100%; background: #4F46E5; border-radius: 4px 4px 0 0; }
+  .bar-wrap span { font-size: 12px; margin-top: 8px; color: #64748B; }
+
+  .top-products { list-style: none; }
+  .top-products li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #E2E8F0; font-size: 14px; }
+  .top-products li:last-child { border-bottom: none; }
+  .top-products .name { color: #0F172A; font-weight: 500; }
+  .top-products .sales { color: #64748B; font-size: 13px; }
+  .change-up { color: #16A34A; font-size: 13px; font-weight: 500; }
+
+  @media (max-width: 1023px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .analytics-grid, .traffic-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 767px) {
+    .sidebar { position: fixed; left: -240px; z-index: 20; }
+    .sidebar.show { left: 0; }
+    .menu-btn { display: block; }
+    .header input { display: none; }
+    .kpi-grid { grid-template-columns: 1fr; }
+    .content { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="dashboard">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="logo">AdminPro</div>
+      <nav>
+        <a href="#" class="active">&#128202; Dashboard</a>
+        <a href="#">&#128200; Analytics</a>
+        <a href="#">&#128101; Users</a>
+        <a href="#">&#128722; Orders</a>
+        <a href="#">&#128230; Products</a>
+        <a href="#">&#9881; Settings</a>
+      </nav>
+      <div class="profile">
+        <div class="avatar">AT</div>
+        <div>
+          <div class="name">Ayush Tiwari</div>
+          <div class="role">Admin</div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="header">
+        <button class="menu-btn" id="menuBtn">&#9776;</button>
+        <input type="text" placeholder="Search...">
+        <div class="header-right">
+          <span>&#128276;</span>
+          <div class="avatar">AT</div>
+        </div>
+      </header>
+
+      <div class="content">
+        <h1>Dashboard</h1>
+
+        <div class="kpi-grid">
+          <div class="card">
+            <div class="kpi-label">Total Revenue</div>
+            <div class="kpi-value">&#8377;1,24,532</div>
+            <div class="kpi-change up">&#8593; 12% from last month</div>
+          </div>
+          <div class="card">
+            <div class="kpi-label">Total Orders</div>
+            <div class="kpi-value">892</div>
+            <div class="kpi-change up">&#8593; 8% from last month</div>
+          </div>
+          <div class="card">
+            <div class="kpi-label">Active Users</div>
+            <div class="kpi-value">3,521</div>
+            <div class="kpi-change up">&#8593; 14% from last month</div>
+          </div>
+          <div class="card">
+            <div class="kpi-label">Conversion Rate</div>
+            <div class="kpi-value">4.2%</div>
+            <div class="kpi-change down">&#8595; 2% from last month</div>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="card">
+            <h2>Revenue Overview <span class="chart-value">&#8377;1,24,532</span><span class="chart-change">+12%</span></h2>
+            <svg viewBox="0 0 300 100" width="100%" height="150" preserveAspectRatio="none">
+              <polyline fill="none" stroke="#4F46E5" stroke-width="3"
+                points="0,80 40,70 80,75 120,50 160,55 200,30 240,35 300,10" />
+            </svg>
+          </div>
+          <div class="card">
+            <h2>Recent Orders</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Customer</th><th>Amount</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Rahul Sharma</td><td>&#8377;2,499</td><td><span class="status delivered">Delivered</span></td></tr>
+                  <tr><td>Priya Singh</td><td>&#8377;4,999</td><td><span class="status processing">Processing</span></td></tr>
+                  <tr><td>Amit Kumar</td><td>&#8377;1,299</td><td><span class="status shipped">Shipped</span></td></tr>
+                  <tr><td>Neha Gupta</td><td>&#8377;3,799</td><td><span class="status delivered">Delivered</span></td></tr>
+                  <tr><td>Sahil Verma</td><td>&#8377;1,499</td><td><span class="status cancelled">Cancelled</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="traffic-grid">
+          <div class="card">
+            <h2>Traffic Overview <span class="chart-value">8,432</span><span class="chart-change">+18%</span></h2>
+            <div class="bar-chart">
+              <div class="bar-wrap"><div class="bar" style="height:40%"></div><span>Mon</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:55%"></div><span>Tue</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:35%"></div><span>Wed</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:70%"></div><span>Thu</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:60%"></div><span>Fri</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:80%"></div><span>Sat</span></div>
+              <div class="bar-wrap"><div class="bar" style="height:100%"></div><span>Sun</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <h2>Top Products</h2>
+            <ul class="top-products">
+              <li><span class="name">Laptop Pro <span class="sales">2,450 sales</span></span><span class="change-up">+12%</span></li>
+              <li><span class="name">Wireless Earbuds <span class="sales">1,892 sales</span></span><span class="change-up">+8%</span></li>
+              <li><span class="name">Smart Watch <span class="sales">1,203 sales</span></span><span class="change-up">+4%</span></li>
+              <li><span class="name">Backpack <span class="sales">982 sales</span></span><span class="change-up">+6%</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('menuBtn').addEventListener('click', function () {
+      document.getElementById('sidebar').classList.toggle('show');
+    });
+  </script>
+
+</body>
+</html>
