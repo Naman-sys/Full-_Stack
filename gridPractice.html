@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+  <style>
+    .container{
+      height:100vh;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      grid-auto-rows:150px;
+      grid-template-areas:
+        "a b c"
+        "a e c"
+        "d e c";
+      gap:10px;    
+
+    }
+
+.container > div {
+    display: flex;
+    flex-direction: column;   /* IMPORTANT */
+    background: red;
+    align-items: center;
+    border-radius: 20px;
+}
+
+#text {
+    width: 100%;
+    background-color: pink;
+    border-radius: 0px 0px 20px 20px;
+    height:30px;
+    text-align:center;
+}
+
+#color {
+    width: 100%;
+    flex: 1;
+    background: linear-gradient(black, red, maroon);
+    border-radius: 20px 20px 0px 0;
+
+}
+
+p {
+    margin: 0;
+}
+
+  </style>
+  </head>
+  <body>
+    <div id='nav'></div>
+    <div class=container>
+      <div id='a'style="grid-area:a; background:linear-gradient(black,red,maroon);"><div id="color"></div><div id="text"><p>Black</p></div></div>
+      <div id='b'style="grid-area:b;background:linear-gradient(green,lime,yellow);"><p>Whitw</p></div>
+      <div id='c'style="grid-area:c;background:linear-gradient(aqua,blue,purple);"><p>red</p></div>
+      <div id='d'style="grid-area:d;background:linear-gradient(pink,cyan,black);"><p>Green</p></div>
+      <div id='e'style="grid-area:e;background:linear-gradient(black,red,maroon);"><p>bluew</p></div>
+      <div id='f'style="grid-area:f;"></div>
+    </div>
+      
+  </body>
+</html>

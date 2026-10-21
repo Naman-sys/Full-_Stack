@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <style>
+      *{
+        margin:0px;
+        padding:0px;
+
+      }
+      body{
+        background:linear-gradient(black,maroon,black,black);
+      }
+     
+      #header{
+        height:200px;
+        width:100vw;
+        gap:10px;
+      }
+      #sec1{
+        height:150px;
+        width:100vw;
+      }
+      #sec2{
+        height:150px;
+        width:100vw;
+
+      }
+      #sec3{
+        height:150px;
+        width:100vw;
+
+      }
+      button{
+        height:30px;
+        width:70px;
+        margin-top:20px;
+        margin-left:30px;
+        border-radius:0px;
+        box-shadow:0px 0px 0px 0px;
+      }
+      #cards1{
+        display:flex;
+        gap:10px;
+        overflow-x: auto;
+      }
+      .a{
+        height:130px;
+        width:150px;
+        background-color:blue;
+        flex-shrink:0;
+
+      }
+      .b{
+        height:130px;
+        width:150px;
+        flex-shrink:0;
+        background-color:maroon;
+
+      }
+      .c{
+        height:130px;
+        width:150px;
+        flex-shrink:0;
+        background-color:purple;
+
+      }
+
+      #sec1,
+      #sec2,
+      #sec3 {
+        margin-bottom: 30px;
+        margin-left:30px;
+      }
+      .a:hover,.b:hover,.c:hover{
+        transform:scale(1.1);
+        box-shadow:0px 0px 15px white;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <h1 style="font-size:45px;color:white;margin-left:30px;margin-top:30px">Midnight Horizon</h1>
+      <p style="font-size:12px;color:white;margin-left:30px">A standard astronout must choose between saving her crew or completing<br>humanity's last mission before the signal fade forever</p>
+      <button>Play</button>
+      <button style="background-color:grey;color:white">More Info</button>
+    </div>
+    <div id="sec1">
+      <p style="color:white;">Trending Now</p>
+      <div id="cards1">
+        <div class='a' style="display:flex;align-items:flex-end;"><p>Echo</p></div>
+        <div class='a'></div>
+        <div class='a'></div>
+        <div class='a'></div>
+        <div class='a'></div>
+        <div class='a'></div>
+        <div class='a'></div>
+        <div class='a'></div>
+        <div class='a'></div>
+        <div class='a'></div>
+      </div>
+    </div>
+    <div id="sec2">
+      <p style="color:white;">Continue Watching</p>
+      <div id="cards1">
+        <div class='b'></div>
+        <div class='b'></div>
+        <div class='b'></div>
+        <div class='b'></div>
+        <div class='b'></div>
+        <div class='b'></div>
+        <div class='b'></div>
+        <div class='b'></div>
+        <div class='b'></div>
+        <div class='b'></div>
+      </div>
+    </div>
+    <div id="sec3">
+      <p style="color:white;">Action Movies</p>
+      <div id="cards1">
+        <div class='c'></div>
+        <div class='c'></div>
+        <div class='c'></div>
+        <div class='c'></div>
+        <div class='c'></div>
+        <div class='c'></div>
+        <div class='c'></div>
+        <div class='c'></div>
+        <div class='c'></div>
+        <div class='c'></div>
+      </div>
+    </div>
+      
+  </body>
+</html>
