@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reaction Timer</title>
+</head>
+<body id="body">
+
+    <h2>Reaction Timer</h2>
+    <h3 id="msg">Click Start</h3>
+    <button onclick="start()">Start</button>
+    <h3 id="result"></h3>
+    <h3 id="best"></h3>
+
+    <script>
+        let timer;
+        let startTime;
+        let ready = false;
+
+        function start() {
+            clearTimeout(timer);
+            ready = false;
+
+            document.body.style.background = "white";
+            document.getElementById("msg").innerText = "Wait for green...";
+            document.getElementById("result").innerText = "";
+
+            let delay = Math.random() * 3000 + 2000;
+
+            timer = setTimeout(function() {
+                document.body.style.background = "green";
+                document.getElementById("msg").innerText = "Click Now!";
+                startTime = Date.now();
+                ready = true;
+            }, delay);
+        }
+
+        document.body.onclick = function() {
+            if (event.target.tagName === "BUTTON") return;
+
+            if (!ready) {
+                clearTimeout(timer);
+                document.getElementById("msg").innerText = "Too early! Click Start again.";
+                return;
+            }
+
+            let time = Date.now() - startTime;
+            document.getElementById("result").innerText =
+                "Your time: " + time + " ms";
+
+            let best = localStorage.getItem("best");
+
+            if (best === null || time < Number(best)) {
+                localStorage.setItem("best", time);
+                best = time;
+            }
+
+            document.getElementById("best").innerText =
+                "Best time: " + best + " ms";
+
+            ready = false;
+        };
+    </script>
+
+</body>
+</html>

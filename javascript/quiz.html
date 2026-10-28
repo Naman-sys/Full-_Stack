@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>My Quiz</h1>
+    <p>Welcome to my quiz!</p>
+    <p id="question">What is the capital of France?</p>
+    
+    <input type="radio" name="option" value="Paris"> Paris<br>
+    <input type="radio" name="option" value="London"> London<br>
+    <input type="radio" name="option" value="Berlin"> Berlin<br>
+    <input type="radio" name="option" value="Rome"> Rome<br>
+    <button onclick="checkAnswer()">Submit Answer</button>
+    <p id="result"></p>
+    <script>
+        function checkAnswer() {
+            const answer = document.querySelector('input[name="option"]:checked');
+            const result = document.getElementById("result");
+            if (answer && answer.value === "Paris") {
+                document.getElementById("result").innerHTML = "Correct!";
+                answer.style.accentColor = "green";
+            } else {
+                document.getElementById("result").innerHTML = "Incorrect.";
+                answer.style.accentColor = "red";
+            }
+        }
+    </script>
+</body>
+</html>

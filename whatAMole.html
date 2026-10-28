@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Whack a Mole</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 10px;
+        }
+
+        button {
+            height: 80px;
+            font-size: 25px;
+        }
+
+        .active {
+            background: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Score: <span id="score">0</span></h2>
+    <h2>Time: <span id="time">30</span></h2>
+
+    <button onclick="start()">Start</button>
+
+    <div class="grid" id="grid"></div>
+
+    <script>
+        let score = 0;
+        let time = 30;
+        let mole;
+        let game;
+        let timer;
+
+        for (let i = 0; i < 9; i++) {
+            let btn = document.createElement("button");
+            document.getElementById("grid").appendChild(btn);
+
+            btn.onclick = function() {
+                if (btn === mole && time > 0) {
+                    score++;
+                    document.getElementById("score").innerText = score;
+                }
+            };
+        }
+
+        let cells = document.querySelectorAll(".grid button");
+
+        function showMole() {
+            cells.forEach(btn => {
+                btn.innerText = "";
+                btn.classList.remove("active");
+            });
+
+            let random = Math.floor(Math.random() * 9);
+            mole = cells[random];
+
+            mole.innerText = "🐹";
+            mole.classList.add("active");
+        }
+
+        function start() {
+            clearInterval(game);
+            clearInterval(timer);
+
+            score = 0;
+            time = 30;
+
+            document.getElementById("score").innerText = score;
+            document.getElementById("time").innerText = time;
+
+            showMole();
+
+            game = setInterval(showMole, 800);
+
+            timer = setInterval(function() {
+                time--;
+                document.getElementById("time").innerText = time;
+
+                if (time === 0) {
+                    clearInterval(game);
+                    clearInterval(timer);
+                    alert("Game Over! Score: " + score);
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
